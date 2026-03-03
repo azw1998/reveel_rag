@@ -1,0 +1,85 @@
+Document ID: xxx
+Document Type: schema
+Databricks Catalog: prod
+Databricks Schema: xxx
+Table Name: xxx
+
+Description:
+
+
+Grain:
+One row per (
+ 'xxx',
+).
+
+Primary Use Cases:
+- xxx
+
+Columns:
+
+chunk_id (STRING / UUID) Unique identifier for the chunk.
+
+document_id (STRING) Stable identifier for the source document.
+
+document_version (STRING) Version tag (hash, timestamp, semver, etc.).
+
+source_type (STRING) Source system (confluence, notion, pdf,
+internal_wiki, etc.).
+
+source_uri (STRING) URL or storage path to original document.
+
+title (STRING) Document title.
+
+section (STRING) Logical section header.
+
+chunk_index (INT) Sequential chunk number within the document.
+
+chunk_text (TEXT) Text content used for embedding and retrieval.
+
+token_count (INT) Token count of chunk.
+
+embedding (VECTOR / ARRAY) Embedding vector for semantic search.
+
+metadata_json (JSON) Flexible metadata (team, product, tags, etc.).
+
+created_at (TIMESTAMP) Ingestion timestamp.
+
+updated_at (TIMESTAMP) Last modification timestamp.
+
+EXAMPLE QUERIES
+
+1.  Retrieve Top-K Similar Chunks
+
+SELECT chunk_id, document_id, title, section, chunk_text,
+cosine_similarity(embedding, :query_embedding) AS score FROM
+rag_document_chunks ORDER BY score DESC LIMIT 10;
+
+2.  Filtered Semantic Search
+
+SELECT chunk_id, chunk_text FROM rag_document_chunks WHERE
+metadata_json:product = ‘billing’ ORDER BY cosine_similarity(embedding,
+:query_embedding) DESC LIMIT 5;
+
+3.  Reconstruct a Full Document
+
+SELECT chunk_text FROM rag_document_chunks WHERE document_id =
+‘carrier_pricing_guide’ ORDER BY chunk_index;
+
+4.  Delete Old Version Before Re-ingest
+
+DELETE FROM rag_document_chunks WHERE document_id =
+‘carrier_pricing_guide’ AND document_version = ‘v1’;
+
+5.  Detect Duplicate Chunks
+
+SELECT document_id, chunk_index, COUNT() FROM rag_document_chunks GROUP
+BY document_id, chunk_index HAVING COUNT() > 1;
+
+OPTIONAL DOCUMENT-LEVEL TABLE
+
+Table Name: rag_documents
+
+Columns:
+
+document_id (PRIMARY KEY) title owner source_uri current_version tags
+(JSON) created_at
