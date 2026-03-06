@@ -37,10 +37,15 @@ def main():
     with open("embedded_docs.json", "r") as f:
         all_chunks = json.load(f)
     docs_ordered_by_relevance = retrieve_context(client, question, all_chunks, k=100)
-    
-    for i, doc in enumerate(docs_ordered_by_relevance):
-        print(f"Relevance score: {i+1}")
-        print(doc["document_id"], doc["entity_name"], doc["chunk_text"])
+
+    test_output = "--------------------------------\n".join(
+        [
+            f'{i+1}. {doc["document_id"]}\n{doc["entity_name"]}\n{doc["document_type"]}\n{doc["chunk_text"]}'
+            for i, doc in enumerate(docs_ordered_by_relevance)
+        ]
+    )
+
+    print(test_output)
 
 
 if __name__ == "__main__":
