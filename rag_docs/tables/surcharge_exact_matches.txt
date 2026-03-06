@@ -75,7 +75,7 @@ Description: sender_country_territory
 Description: sender_state
 
 13. is_transportation_charge: Boolean
-Description: Flags whether the charge is from a transportation_charge. Only transportation charges should get surcharge_ids.
+Description: Flags whether the charge is from a transportation_charge. Only non-transportation charges should get surcharge_ids.
 
 14. charge_description_code: String
 Description: ups charges have charge_description_code. for all other carriers this field will be null. Just like with charge_description, make sure that joins using this column are trimmed and lowercased.

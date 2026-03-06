@@ -1,0 +1,10 @@
+Document ID: premodel_join_surcharge_exact_matches
+Document Type: join
+Databricks Catalog: prod
+Left Table Name: premodel
+Right Table Name: exact_matches
+
+Description:
+The premodel table does not have surcharge id. 
+When we want to know about surcharge info from the premodel table we can't just filter on charge_description.
+We have to join exact_matches onto premodel to get the surcharge_id and surcharge_name, and then use the surcharge_name to answer the initial query.
