@@ -22,14 +22,15 @@ Primary Use Cases:
 - Asking questions about a particular shipment.
 
 Notes:
-lead_shipment_number is the raw column value that the carriers provide, but lead_shipment_id is truly the id for the shipment. Note that the shipment identifier is lead shipment id.
+- lead_shipment_number is the raw column value that the carriers provide, but lead_shipment_id is truly the id for the shipment. Note that the shipment identifier is lead shipment id.
 tracking_number is the raw column value that the carriers provide, but shipment_id is truly the package id. 
 so when a query asks for the shipment id, we give lead_shipment_id. the package is actually shipment_id.
-All charges from the same package will have the same shipment_id.
-All charges from the same shipment will have the same lead_shipment_id.
-Multipiece and hundredweight shipments have one lead_shipment_id, but one shipment_id for each unique package. 
+- All charges from the same package will have the same shipment_id.
+- All charges from the same shipment will have the same lead_shipment_id.
+- Multipiece and hundredweight shipments have one lead_shipment_id, but one shipment_id for each unique package. 
 hwt shipments bundle all the packages together and sum the weights for pricing. multipiece shipments are priced per package still.
 queries about surcharge spend should filter out transportation charges.
+- This table does not have surcharge id, so you will have to join on exact_matches to get the correct surcharge_id.
 
 Columns:
 
