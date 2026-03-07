@@ -3,6 +3,8 @@ from pathlib import Path
 from retrieve_context import retrieve_context
 import json
 
+from prompts import get_augmented_answer
+
 
 def get_simple_answer(client, question, schema_doc):
     return client.responses.create(
@@ -38,6 +40,8 @@ def main():
     with open("embedded_docs.json", "r") as f:
         all_chunks = json.load(f)
     docs_ordered_by_relevance = retrieve_context(client, question, all_chunks, k=10)
+
+    print(get_augmented_answer(relevant_docs=docs_ordered_by_relevance))
 
     # test_output = "--------------------------------\n".join(
     #     [
