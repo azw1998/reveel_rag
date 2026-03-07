@@ -32,11 +32,12 @@ def main():
     question = "What surcharge id should the surge surcharge for tracking number 1Z97Y6036659856231 get?"
     # question = "What is the total spend for tracking number 1Z97Y6036659856231?"
 
-    answer = get_simple_answer(client, question, schema_doc)
-    print(answer.output_text)
-    # with open("embedded_docs.json", "r") as f:
-    #     all_chunks = json.load(f)
-    # docs_ordered_by_relevance = retrieve_context(client, question, all_chunks, k=100)
+    # answer = get_simple_answer(client, question, schema_doc)
+    # print(answer.output_text)
+
+    with open("embedded_docs.json", "r") as f:
+        all_chunks = json.load(f)
+    docs_ordered_by_relevance = retrieve_context(client, question, all_chunks, k=10)
 
     # test_output = "--------------------------------\n".join(
     #     [

@@ -1,4 +1,8 @@
-Function: get_normalized_surcharge
+Document ID: get_normalized_surcharge
+Document Type: function
+Input: Dataframe with table schema of premodel
+Output: Datafarme with two extra columns: surcharge_id and surcharge_name
+Function Name: get_normalized_surcharge
 
 Description: 
 For an input dataframe of charges, adds two columns: surcharge_id and surcharge_name to the dataframe. Use this function if the query is about surcharge information, but surcharge_id and surcharge_name is not in the shipments table.

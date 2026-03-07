@@ -9,7 +9,7 @@ with open("/Users/anthonywang/.langchain", "r") as f:
 
 client = OpenAI(api_key=api_key)
 
-FOLDER_PATH = "rag_docs/tables"
+FOLDER_PATH = "rag_docs/"
 OUTPUT_FILE = "embedded_docs.json"
 
 # Choose encoding compatible with modern OpenAI models
@@ -39,7 +39,7 @@ def embed_text(client, text):
 
 all_embedded_chunks = []
 
-for file_path in Path(FOLDER_PATH).glob("*.txt"):
+for file_path in Path(FOLDER_PATH).rglob("*.txt"):
     with open(file_path, "r", encoding="utf-8") as f:
         text = f.read()
 

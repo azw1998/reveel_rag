@@ -1,4 +1,8 @@
-Function: get_table
+Document ID: get_table
+Document Type: function
+Input: str (table name)
+Output: Dataframe
+Function Name: get_table
 
 Description:
 Returns the appropriate table as a dataframe.

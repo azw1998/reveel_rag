@@ -1,4 +1,8 @@
-Function: get_shipment
+Document ID: get_shipment
+Document Type: function
+Input: List[str] (tracking_number(s), lead_shipment_number(s), shipment_id(s), lead_shipment_id(s))
+Output: Dataframe
+Function Name: get_shipment
 
 Description:
 Returns shipment charge rows for a given tracking number.
